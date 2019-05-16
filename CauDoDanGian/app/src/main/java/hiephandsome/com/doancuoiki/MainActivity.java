@@ -1,5 +1,6 @@
 package hiephandsome.com.doancuoiki;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,11 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import hiephandsome.com.doancuoiki.DanhSach.DongVatFragment;
-import hiephandsome.com.doancuoiki.DanhSach.HoaQuaFragment;
 import hiephandsome.com.doancuoiki.DanhSach.HomeFragment;
-import hiephandsome.com.doancuoiki.DanhSach.KhacFragment;
-import hiephandsome.com.doancuoiki.DanhSach.NgayTetFragment;
+import hiephandsome.com.doancuoiki.Slide.ScreenSlideActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -47,6 +45,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Khởi động lên sẽ chạy vào fragment home
         HomeFragment homeFragment=new HomeFragment();
         FragmentManager fragmentManager=getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content,homeFragment,homeFragment.getTag()).commit();
@@ -88,6 +88,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+
+        //Dựa vào id bên menu/activity_main_drawer.xml để xác định id để chuyển qua fragment tưởng ứng
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
@@ -96,21 +98,18 @@ public class MainActivity extends AppCompatActivity
             FragmentManager fragmentManager=getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content,homeFragment,homeFragment.getTag()).commit();
         } else if (id == R.id.nav_dongvat) {
-            DongVatFragment dongVatFragment=new DongVatFragment();
-            FragmentManager fragmentManager=getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content,dongVatFragment,dongVatFragment.getTag()).commit();
+            Intent i=new Intent(this, ScreenSlideActivity.class);
+            i.putExtra("Loai","DV");
+            startActivity(i);
+
         } else if (id == R.id.nav_hoaqua) {
-            HoaQuaFragment hoaQuaFragment=new HoaQuaFragment();
-            FragmentManager fragmentManager=getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content,hoaQuaFragment,hoaQuaFragment.getTag()).commit();
-        } else if (id == R.id.nav_ngaytet) {
-            NgayTetFragment ngayTetFragment=new NgayTetFragment();
-            FragmentManager fragmentManager=getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content,ngayTetFragment,ngayTetFragment.getTag()).commit();
-        } else if (id == R.id.nav_khac) {
-            KhacFragment khacFragment=new KhacFragment();
-            FragmentManager fragmentManager=getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content,khacFragment,khacFragment.getTag()).commit();
+            Intent i=new Intent(this, ScreenSlideActivity.class);
+            i.putExtra("Loai","HQ");
+            startActivity(i);
+        } else  {
+            Intent i=new Intent(this, ScreenSlideActivity.class);
+            i.putExtra("Loai","NT");
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

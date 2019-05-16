@@ -25,10 +25,7 @@
                 android:id="@+id/nav_ngaytet"
                 android:icon="@drawable/tracnghiem"
                 android:title="Về ngày tết" />
-            <item
-                android:id="@+id/nav_khac"
-                android:icon="@drawable/tracnghiem"
-                android:title="Khác" />
+
             </group>
         </menu>
     </item>

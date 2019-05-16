@@ -23,7 +23,7 @@ import hiephandsome.com.doancuoiki.R;
  * A simple {@link Fragment} subclass.
  */
 public class ScreenSlidePageFragment extends Fragment {
-    ArrayList<BoCauHoi> boCauHoiArrayList ;
+    ArrayList<BoCauHoi> boCauHoiArrayList ; //Danh sách câu hỏi
     public static final String PageNumber="PageNumber";
     private int mPageNumber;//Vị trí trang hiện tại
 
@@ -66,6 +66,7 @@ public class ScreenSlidePageFragment extends Fragment {
         mPageNumber= getArguments().getInt(PageNumber);
     }
 
+    //Hàm tạo để lấy được pagenumber
     public static ScreenSlidePageFragment create(int pageNumber)
     {
         ScreenSlidePageFragment screenSlidePageFragment=new ScreenSlidePageFragment();
@@ -79,6 +80,8 @@ public class ScreenSlidePageFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        //set các giá trị của các trường trong fragment slide
 
       if(mPageNumber>=boCauHoiArrayList.size())
       {
@@ -95,10 +98,14 @@ public class ScreenSlidePageFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-                int da=checkedId%10;
+                int da=checkedId%10; //Lấy số cuối của id để xác nhận đang click vào radio button nào
+                //
+                int a=5-1;int b=6-1;int c=7-1;int d=8-1;
+                // 5:A - 6:B - 7:C  - 8:D
+//                Toast.makeText(getActivity(),""+checkedId, Toast.LENGTH_SHORT).show();
                if(DapAn.equals("A"))
                {
-                   if(da==5)
+                   if(da==a)
                    {
                        radA.setBackgroundColor(Color.GREEN);
                    }
@@ -107,7 +114,7 @@ public class ScreenSlidePageFragment extends Fragment {
                    }
                }else{
                    if(DapAn.equals("B")){
-                       if(da==6)
+                       if(da==b)
                        {
                            radB.setBackgroundColor(Color.GREEN);
                        }
@@ -117,7 +124,7 @@ public class ScreenSlidePageFragment extends Fragment {
                    }else{
                        if(DapAn.equals("C"))
                        {
-                           if(da==7)
+                           if(da==c)
                            {
                                radC.setBackgroundColor(Color.GREEN);
                            }
@@ -125,7 +132,7 @@ public class ScreenSlidePageFragment extends Fragment {
                                radC.setBackgroundColor(Color.RED);
                            }
                        }else{
-                           if(da==8)
+                           if(da==d)
                            {
                                radD.setBackgroundColor(Color.GREEN);
                            }

@@ -26,7 +26,9 @@ public class ScreenSlideActivity extends FragmentActivity {
     /**
      * The number of pages (wizard steps) to show in this demo.
      */
-    private static final int NUM_PAGES = 2;
+
+    //Số Slide page
+    private static final int NUM_PAGES = 16;
 
     /**
      * The pager widget, which handles animation and allows swiping horizontally to access previous
@@ -43,8 +45,8 @@ public class ScreenSlideActivity extends FragmentActivity {
 
     TextView tvKiemtra;
 
-    MyDatabaseHelper myDatabaseHelper;
-     ArrayList<BoCauHoi> boCauHoiArrayList ;
+    MyDatabaseHelper myDatabaseHelper; // khai báo database
+     ArrayList<BoCauHoi> boCauHoiArrayList ;// danh sách bộ câu hỏi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +59,12 @@ public class ScreenSlideActivity extends FragmentActivity {
         mPager.setAdapter(pagerAdapter);
         mPager.setPageTransformer(true, new DepthPageTransformer());
 
-        myDatabaseHelper=new MyDatabaseHelper(this);
-        myDatabaseHelper.createDefaultBoCauHoi();
-        boCauHoiArrayList=myDatabaseHelper.getAllNotesBoCauHoi("DV");
+        myDatabaseHelper=new MyDatabaseHelper(this); // khởi tạo database
+        myDatabaseHelper.createDefaultBoCauHoi(); // tạo dữ liệu
+
+        //Lấy dữ liệu theo chủ đề
+        Intent i=getIntent();
+        boCauHoiArrayList=myDatabaseHelper.getAllBoCauHoi(i.getStringExtra("Loai"));
         tvKiemtra=(TextView) findViewById(R.id.tvKiemTra);
 
         tvKiemtra.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +75,7 @@ public class ScreenSlideActivity extends FragmentActivity {
         });
     }
 
+    //Trả về list bộ câu hỏi để bên slide lấy được dữ liệu load lên màn hình
     public ArrayList<BoCauHoi> getBoCauHoiArrayList() {
         return boCauHoiArrayList;
     }
@@ -97,16 +103,17 @@ public class ScreenSlideActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-
+            //gửi bị trí hiện tại của fragment để sang slide biết rằng mình đang ở vị trí bao nhiêu.
             return ScreenSlidePageFragment.create(position);
         }
 
         @Override
         public int getCount() {
             return NUM_PAGES;
+
         }
     }
-
+//Hiệu ứng của slide
     public class DepthPageTransformer implements ViewPager.PageTransformer {
         private static final float MIN_SCALE = 0.75f;
 
@@ -146,6 +153,8 @@ public class ScreenSlideActivity extends FragmentActivity {
 
     public void TroVe()
     {
+        //Chuyển về trang home
+
         Intent i=new Intent(this, MainActivity.class);
         startActivity(i);
     }
