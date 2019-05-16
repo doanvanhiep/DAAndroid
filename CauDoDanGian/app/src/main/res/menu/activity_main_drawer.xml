@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home"
+            android:title="Trang chủ" />
+    </group>
+
+    <item android:title="Câu đố dân gian">
+        <menu>
+            <group android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_dongvat"
+                android:icon="@drawable/tracnghiem"
+                android:title="Về con vật" />
+            <item
+                android:id="@+id/nav_hoaqua"
+                android:icon="@drawable/tracnghiem"
+                android:title="Về Hoa Quả, Cây Cối" />
+            <item
+                android:id="@+id/nav_ngaytet"
+                android:icon="@drawable/tracnghiem"
+                android:title="Về ngày tết" />
+            <item
+                android:id="@+id/nav_khac"
+                android:icon="@drawable/tracnghiem"
+                android:title="Khác" />
+            </group>
+        </menu>
+    </item>
+
+</menu>
